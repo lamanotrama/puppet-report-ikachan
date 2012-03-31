@@ -1,0 +1,6 @@
+host: ikachan.example.jp
+port: 4444
+channels:
+  - #foo
+  - #bar
+
