@@ -16,9 +16,6 @@ Puppet::Reports.register_report(:ikachan) do
       Net::HTTP.start(host, port) {|http|
         body = "channel=#{channel}"
         res = http.post('/join', body)
-      }
-
-      Net::HTTP.start(host, port) {|http|
         self.logs.each do |log|
           message = sprintf "%s %s %s: %s", self.host, log.source, log.level, log.message
           body = "channel=#{channel}&message=#{message}"
