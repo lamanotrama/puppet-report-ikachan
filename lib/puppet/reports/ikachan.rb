@@ -1,6 +1,7 @@
 require 'puppet'
 require 'puppet/network/http_pool'
 require 'uri'
+require 'string-irc'
 
 Puppet::Reports.register_report(:ikachan) do
   def process
@@ -18,6 +19,10 @@ Puppet::Reports.register_report(:ikachan) do
         res = http.post('/join', body)
         self.logs.each do |log|
           message = sprintf "%s %s %s: %s", self.host, log.source, log.level, log.message
+          if log.level == :err
+            message = StringIrc.new(message)
+            message.pink
+          end
           body = "channel=#{channel}&message=#{message}"
           res = http.post('/notice', body)
         end
