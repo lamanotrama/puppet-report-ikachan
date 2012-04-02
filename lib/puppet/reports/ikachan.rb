@@ -8,20 +8,24 @@ Puppet::Reports.register_report(:ikachan) do
     configfile = File.join([File.dirname(Puppet.settings[:config]), "ikachan.yaml"])
     raise(Puppet::ParseError, "IRC report config file #{configfile} not readable") unless File.exist?(configfile)
     @config = YAML.load_file(configfile)
+
+    return if self.status == "unchanged"
+
+    message = StringIrc.new(sprintf "Puppet status: %s on %s", self.status, self.host)
+    if self.status == "changed"
+      message.lime
+    else
+      message.pink
+    end
+
     @config["channels"].each do |channel|
       channel.gsub!(/^\\/, '')
       Net::HTTP.start(@config["host"], @config["port"]) {|http|
         body = "channel=#{channel}"
         res = http.post('/join', body)
-        self.logs.each do |log|
-          message = sprintf "%s %s %s: %s", self.host, log.source, log.level, log.message
-          if log.level == :err
-            message = StringIrc.new(message)
-            message.pink
-          end
-          body = "channel=#{channel}&message=#{message}"
-          res = http.post('/notice', body)
-        end
+
+        body = "channel=#{channel}&message=#{message}"
+        res = http.post('/notice', body)
       }
     end
   end
