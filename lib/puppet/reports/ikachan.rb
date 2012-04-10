@@ -11,7 +11,7 @@ Puppet::Reports.register_report(:ikachan) do
 
     return if self.status == "unchanged"
 
-    message = StringIrc.new(sprintf "Puppet status: %s on %s [%s]", self.status, self.host, self.environment)
+    message = StringIrc.new(sprintf "Puppet status: %s on %s [%s]", self.status, self.host, Puppet.settings[:environment])
     if self.status == "changed"
       message.lime
     else

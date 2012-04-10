@@ -1,5 +1,5 @@
 name    'report-ikachan'
-version '0.0.4'
+version '0.0.5'
 source 'UNKNOWN'
 author 'report'
 license 'UNKNOWN'
