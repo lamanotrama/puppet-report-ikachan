@@ -1,11 +1,11 @@
 {
-  "name": "mizzy-report_ikachan",
+  "name": "lamanotrama-report_ikachan",
   "version": "0.0.6",
-  "author": "mizzy",
+  "author": "lamanotrama",
   "summary": "sending logs to ikachan",
   "license": "Apache 2.0",
-  "source": "git@github.com:mizzy/puppet-report-ikachan.git",
-  "project_page": "https://github.com/mizzy/puppet-report-ikachan",
+  "source": "git@github.com:lamanotrama/puppet-report-ikachan.git",
+  "project_page": "https://github.com/lamanotrama/puppet-report-ikachan",
   "issues_url": null,
   "dependencies": [
   
